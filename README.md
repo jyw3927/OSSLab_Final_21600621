@@ -3,6 +3,7 @@ The final project of 2020-1 OSS Lab in Handong Global University
 ### Project name : The contact application of professors in CSEE, HGU
 ### Video URL : 
 
+
 ## What does this project do?
 This application provides **emails and contact information** of **professors in CSEE, HGU**.
 * Adding : You can load the data from the txt file, or insert by your input.
@@ -24,19 +25,19 @@ Later, when you want to contact the professor or modify the contacts, this appli
 
 ## How do I get started? (+Tool)
 1. The source code of this application was written by **C++**, so you have to install g++ in your raspberry pi.
-
+```
 	$ sudo apt-get install g++
-
+```
 2. Enter "make" command to compile.
-
+```
 	$ make
-
+```
 3. There will be a executable file "contactAPP".
 Enjoy!
-
+```
 	$ ./contactAPP
 
-
+```
 ## Where can I get mor help, if I need it?
 When you need some help, please email me 21600621@handong.edu.
 
