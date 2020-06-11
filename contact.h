@@ -4,20 +4,15 @@
 #include <string.h>
 #include <string>
 #include <memory.h>
+#include "error.h"
+
 
 using namespace std;
 
 #define MAX_NUM 1000
 
 typedef struct {
-  int year;
-  int month;
-  int day;
-} Date;
-
-typedef struct {
   char name[64];
-  Date dob;
   char email[64];
   char phone[16];
 } Person;
@@ -28,7 +23,6 @@ class Contact {
     int total_num;
     
     Person str2person(char*);
-    Date str2date(char*);
     
   public:
     Contact(int size) {

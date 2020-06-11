@@ -13,34 +13,13 @@ Person Contact::str2person(char* line)
     
     switch(i) {
       case 0: strcpy(cont.name, temp); break;
-      case 1: cont.dob = str2date(temp); break;
-      case 2: strcpy(cont.email, temp); break;
-      case 3: strcpy(cont.phone, temp); break;
+      case 1: strcpy(cont.email, temp); break;
+      case 2: strcpy(cont.phone, temp); break;
     }
     i++;
     token = strtok(NULL, ";");
   }
   return cont;
-}
-
-Date Contact::str2date(char* str)
-{
-  Date date;
-  char temp[10];
-  
-  strncpy(temp, str, 4);
-  temp[4] = 0;
-  date.year = atoi(temp);
-  
-  strncpy(temp, str+4, 2);
-  temp[2] = 0;
-  date.month = atoi(temp);
-  
-  strncpy(temp, str+6, 2);
-  temp[2] = 0;
-  date.day = atoi(temp);
-  
-  return date;
 }
 
 void Contact::load_contact(string file_name) {
@@ -55,14 +34,20 @@ void Contact::load_contact(string file_name) {
   
   FILE *fp_l;
   fp_l = fopen(fname_l, "r");
-  
+  if(fp_l == NULL) {
+    cout << "there is no " << fname_l << " in the directory.." << endl;
+    return;
+    }
+  else {
   int cont_i = 0;
   while (getline(&line, &len, fp_l) != EOF){
-    //persons[cont_i++] = str2person(line);
     insert_contact(line);
   }
+  cout << ">> Contact data loaded from the file!" << endl;
+
   free(line);
   fclose(fp_l);
+  }
 }
 
 void Contact::save_contact(string file_name) {
@@ -80,7 +65,7 @@ void Contact::save_contact(string file_name) {
     for(int i = 0; i < MAX_NUM; i++) {
       c = persons[i];
       if(strcmp(c.name, "\0") != 0)
-        fprintf(fp_s, "%s; %4d%02d%02d; %s; %s\n", c.name, c.dob.year, c.dob.month, c.dob.day, c.email, c.phone);
+        fprintf(fp_s, "%s; %s; %s\n", c.name, c.email, c.phone);
     }
     cout << "Contacts data is saved into " << file_name << endl;
     fclose(fp_s);
@@ -98,8 +83,8 @@ void Contact::insert_contact(string data_to_insert)
   while(con) {
     if(strcmp(persons[last].name, "\0") == 0) {
       persons[last] = str2person(new_contact);
-      cout << "New contact inserted!" << endl;
       con = 0;
+      cout << "A new line inserted in contacts!!" << endl;
     }
     else
       last++;
@@ -123,8 +108,7 @@ void Contact::retrieve_contact(string str_retrieve)
   int r = search(str_retrieve);
   
   if(r >= 0)
-    printf("%s; %4d%02d%02d; %s; %s\n", persons[r].name, persons[r].dob.year, persons[r].dob.month,
-      persons[r].dob.day, persons[r].email, persons[r].phone);
+    printf("%s; %s; %s\n", persons[r].name, persons[r].email, persons[r].phone);
 }
 
 int Contact::search(string str_search)
@@ -159,7 +143,7 @@ void Contact::print()
     for(int i = 0; i < MAX_NUM; i++) {
       c = persons[i];
      if(strcmp(c.name, "\0") != 0)
-        printf("%s; %4d%02d%02d; %s; %s\n", c.name, c.dob.year, c.dob.month, c.dob.day, c.email, c.phone);
+        printf("%s; %s; %s\n", c.name, c.email, c.phone);
     }
   }
 }
