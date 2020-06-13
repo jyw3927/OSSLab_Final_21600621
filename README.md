@@ -5,7 +5,7 @@ The final project of 2020-1 OSS Lab in Handong Global University
 
 
 ## What does this project do?
-This application provides **emails and contact information** of **professors in CSEE, HGU**.
+This application provides management to **emails and contact information** of **professors in CSEE, HGU**.
 * Adding : You can load the data from the txt file, or insert by your input.
 * Deleting : You can delete a contact from the application by entering name or email.
 * Retrieving : You can search a contact from the application by entering name or email.
